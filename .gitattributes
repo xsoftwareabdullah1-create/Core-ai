@@ -1,0 +1,15 @@
+# Keep the real implementation languages visible in GitHub's Linguist breakdown.
+*.kt linguist-detectable=true
+*.kts linguist-detectable=true
+*.rs linguist-detectable=true
+*.cpp linguist-detectable=true
+*.hpp linguist-detectable=true
+*.h linguist-detectable=true
+*.py linguist-detectable=true
+*.cmake linguist-detectable=true
+CMakeLists.txt linguist-detectable=true
+
+# These are source files, not generated or vendored content.
+app/src/main/cpp/** linguist-vendored=false
+app/src/main/python/** linguist-vendored=false
+native/rust/** linguist-vendored=false
