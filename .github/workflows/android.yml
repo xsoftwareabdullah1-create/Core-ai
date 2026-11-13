@@ -43,7 +43,12 @@ jobs:
       - name: Compile Android APK
         env:
           BUILD_VARIANT: ${{ inputs.build_variant || 'debug' }}
-        run: gradle --no-daemon ${BUILD_VARIANT == 'release' && 'assembleRelease' || 'assembleDebug'}
+        run: |
+          if [ "$BUILD_VARIANT" = "release" ]; then
+            gradle --no-daemon assembleRelease
+          else
+            gradle --no-daemon assembleDebug
+          fi
       - name: Prepare named APK
         env:
           BUILD_VARIANT: ${{ inputs.build_variant || 'debug' }}
