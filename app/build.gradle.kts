@@ -2,15 +2,27 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.chaquo.python")
 }
 android {
     namespace = "ai.ultron.mobile"
     compileSdk = 35
-    defaultConfig { applicationId = "ai.ultron.mobile"; minSdk = 26; targetSdk = 35; versionCode = 2; versionName = "1.1.0" }
+    ndkVersion = "27.0.12077973"
+    defaultConfig {
+        applicationId = "ai.ultron.mobile"
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 3
+        versionName = "2.0.0"
+        ndk { abiFilters += listOf("arm64-v8a") }
+        externalNativeBuild { cmake { cppFlags += listOf("-std=c++20") } }
+    }
     buildFeatures { compose = true }
+    externalNativeBuild { cmake { path = file("src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
 }
+chaquopy { defaultConfig { version = "3.11" } }
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.activity:activity-compose:1.10.0")
