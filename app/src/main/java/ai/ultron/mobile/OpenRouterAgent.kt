@@ -56,6 +56,8 @@ class OpenRouterAgent(
         report: (String) -> Unit
     ): String {
         require(apiKey.isNotBlank()) { "Set your OpenRouter API key in Settings." }
+        report("Native route: ${NativeEngine.classify(prompt)}")
+        val pythonRuntime = PythonRuntime(context)
         val messages = JSONArray()
         messages.put(JSONObject().put("role", "system").put("content", """
 You are ULTRON, an autonomous Android coding agent. Use available tools to work, not just describe.
@@ -78,6 +80,14 @@ Use workspace files for project code. Keep paths relative, do not attempt to esc
                 val name = fn.getString("name")
                 val args = JSONObject(fn.optString("arguments", "{}"))
                 val action = AgentAction(call.optString("id"), name, args)
+                // Python validates the structured plan; Kotlin remains the only executor.
+                val validated = pythonRuntime.validatePlan(
+                    JSONObject().put("steps", JSONArray().put(
+                        JSONObject().put("tool", name).put("arguments", args)
+                    )).toString()
+                )
+                val validatedStep = JSONObject(validated).getJSONArray("steps").getJSONObject(0)
+                require(validatedStep.getString("tool") == name) { "Python runtime rejected tool plan." }
                 report(action.description())
                 val result = if (approve(action)) {
                     try { execute(name, args) } catch (e: Exception) { "Tool failed: ${e.message}" }
