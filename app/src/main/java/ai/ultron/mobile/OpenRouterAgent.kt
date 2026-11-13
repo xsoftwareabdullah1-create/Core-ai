@@ -70,7 +70,7 @@ Keep workspace paths relative. Explain destructive overwrites/deletions. For bui
         history.takeLast(12).forEach { (role,text)->messages.put(JSONObject().put("role",role).put("content",text)) }
         messages.put(JSONObject().put("role","user").put("content",prompt))
         repeat(7) {
-            val response=request(messages); val message=response.getJSONArray("choices").getJSONObject(0).getJSONObject("message)
+            val response=request(messages); val message=response.getJSONArray("choices").getJSONObject(0).getJSONObject("message")
             val calls=message.optJSONArray("tool_calls")
             if(calls==null||calls.length()==0) return message.optString("content","Done.")
             messages.put(message)
