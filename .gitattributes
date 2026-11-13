@@ -1,15 +1,10 @@
-# Keep the real implementation languages visible in GitHub's Linguist breakdown.
-*.kt linguist-detectable=true
-*.kts linguist-detectable=true
-*.rs linguist-detectable=true
-*.cpp linguist-detectable=true
-*.hpp linguist-detectable=true
-*.h linguist-detectable=true
-*.py linguist-detectable=true
-*.cmake linguist-detectable=true
-CMakeLists.txt linguist-detectable=true
-
-# These are source files, not generated or vendored content.
-app/src/main/cpp/** linguist-vendored=false
-app/src/main/python/** linguist-vendored=false
-native/rust/** linguist-vendored=false
+# Explicitly classify ULTRON's real implementation files in GitHub Linguist.
+# The repository is Kotlin-first, but these native/runtime sources are also real code.
+*.kt linguist-detectable=true linguist-language=Kotlin
+*.kts linguist-detectable=true linguist-language=Kotlin
+native/rust/src/*.rs linguist-detectable=true linguist-language=Rust linguist-vendored=false
+app/src/main/cpp/*.cpp linguist-detectable=true linguist-language=C++ linguist-vendored=false
+app/src/main/cpp/*.h linguist-detectable=true linguist-language=C++ linguist-vendored=false
+app/src/main/cpp/*.hpp linguist-detectable=true linguist-language=C++ linguist-vendored=false
+app/src/main/python/*.py linguist-detectable=true linguist-language=Python linguist-vendored=false
+app/src/main/cpp/CMakeLists.txt linguist-detectable=true linguist-language=CMake
