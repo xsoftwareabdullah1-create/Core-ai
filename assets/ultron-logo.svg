@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102a48"/><stop offset="1" stop-color="#050914"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a7f2ff"/><stop offset=".45" stop-color="#28c9ff"/><stop offset="1" stop-color="#0875ff"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#bg)" stroke="#168dcb" stroke-width="5"/>
+  <circle cx="256" cy="228" r="174" fill="none" stroke="#1b8fca" stroke-width="3" opacity=".5"/>
+  <circle cx="256" cy="228" r="150" fill="none" stroke="#37d7ff" stroke-width="2" stroke-dasharray="9 13" opacity=".7"/>
+  <path d="M256 72 370 126 394 248 334 352 256 388 178 352 118 248 142 126Z" fill="#0b1d32" stroke="url(#cyan)" stroke-width="9" filter="url(#glow)"/>
+  <path d="M170 178 222 154 244 208 198 246 152 230Z M342 178 290 154 268 208 314 246 360 230Z" fill="#06111f" stroke="#33d9ff" stroke-width="5"/>
+  <path d="M172 215 224 199 210 220 168 232Z M340 215 288 199 302 220 344 232Z" fill="#56eaff" filter="url(#glow)"/>
+  <path d="M224 268 288 268 278 324 256 342 234 324Z" fill="#102a45" stroke="#35cfff" stroke-width="4"/>
+  <path d="M256 276 281 292 256 309 231 292Z" fill="url(#cyan)" filter="url(#glow)"/>
+  <path d="M205 105 256 83 307 105 290 133 256 145 222 133Z" fill="#153756" stroke="#4be3ff" stroke-width="4"/>
+  <text x="256" y="464" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="5" fill="#eafaff">ULTRON</text>
+  <text x="256" y="490" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" letter-spacing="8" fill="#48dfff">A I</text>
+</svg>
