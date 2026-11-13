@@ -34,11 +34,11 @@ The project is under active development. Features marked **Planned** are goals, 
 | Voice input | Foundation |
 | User-approved screen capture and image analysis | Foundation |
 | Private app workspace file operations | Foundation |
-| Android accessibility service integration | Foundation; approval flow being developed |
-| Autonomous AI tool planning and execution loop | Planned |
-| Per-action approval queue for taps, typing and gestures | Planned |
-| GitHub Actions APK build pipeline | Workflow setup in progress |
-| In-app build dispatch and live build monitoring | Planned |
+| Android accessibility service integration | Foundation; user approval dialog wired into agent loop |
+| OpenRouter function-calling loop with bounded iterations | Implemented foundation |
+| Per-tool approval dialog before execution | Implemented for registered tools |
+| GitHub Actions APK build pipeline | Configured; CI verification in progress |
+| In-app build dispatch and status polling | Implemented foundation |
 | AI-assisted build-log diagnosis and repair | Planned |
 
 **Safety first:** ULTRON must never silently tap, type, install, delete or run potentially destructive actions. Sensitive device actions should be shown to the user with a clear explanation and require explicit approval.
@@ -53,8 +53,14 @@ The project is under active development. Features marked **Planned** are goals, 
 6. For supported projects, trigger a remote GitHub Actions build.
 7. Display build status and provide the APK artifact when the workflow succeeds.
 
-## 🛠️ Tech stack
+## 🧬 Advanced architecture
 
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the runtime boundaries and native build design.
+
+- **Kotlin + Jetpack Compose** — Android lifecycle, UI, permissions, coroutine-based agent orchestration
+- **C++ / JNI** — narrow native interface compiled with CMake
+- **Rust** — Android arm64 native shared library, linked into the JNI bridge
+- **Python 3.11 / Chaquopy** — embedded deterministic plan validation; not an unrestricted shell
 - **Kotlin** — Android application logic
 - **Jetpack Compose** — modern native UI
 - **OpenRouter API** — model access (model availability depends on provider)
@@ -62,6 +68,8 @@ The project is under active development. Features marked **Planned** are goals, 
 - **MediaProjection** — user-consented screen capture
 - **GitHub Actions** — remote Android build automation
 - **AndroidX Security Crypto** — encrypted preference storage
+
+The Rust classifier and Python validator are deterministic helper layers. They are not independent AI models and do not grant unrestricted device access.
 
 ## 📱 Requirements
 
