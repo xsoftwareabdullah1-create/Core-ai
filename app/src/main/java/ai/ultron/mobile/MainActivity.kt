@@ -89,14 +89,18 @@ private fun UltronHome(openAccessibility: () -> Unit) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
                     Column {
                         Text("ULTRON AI", color = Color.White, fontSize = 26.sp)
-                        Text("AUTONOMOUS CODING ENGINE", color = Neon, fontSize = 9.sp, letterSpacing = 2.sp)
+                        Text("PERSONAL AI • DEVICE CONTROL", color = Neon, fontSize = 9.sp, letterSpacing = 1.5.sp)
                     }
                     IconButton(onClick = { settingsOpen = true }) { Icon(Icons.Default.Settings, null, tint = Neon) }
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(Modifier.fillMaxWidth().background(SurfaceDark, RoundedCornerShape(20.dp)).border(1.dp, Neon.copy(alpha = .35f), RoundedCornerShape(20.dp)).padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.size(66.dp).border(2.dp, Neon, CircleShape).padding(8.dp).border(1.dp, Neon.copy(alpha = .45f), CircleShape), contentAlignment = Alignment.Center) {
-                        Icon(Icons.Default.Memory, null, tint = Neon, modifier = Modifier.size(34.dp))
+                    Box(Modifier.size(76.dp), contentAlignment = Alignment.Center) {
+                        Box(Modifier.fillMaxSize().border(1.dp, Neon.copy(alpha = .28f), CircleShape).padding(6.dp).border(1.dp, Neon.copy(alpha = .55f), CircleShape).padding(5.dp).border(2.dp, Neon.copy(alpha = .8f), CircleShape), contentAlignment = Alignment.Center) {
+                            Box(Modifier.size(34.dp).background(Neon.copy(alpha = .12f), CircleShape).border(1.dp, Neon, CircleShape), contentAlignment = Alignment.Center) {
+                                Icon(Icons.Default.Memory, null, tint = Neon, modifier = Modifier.size(22.dp))
+                            }
+                        }
                     }
                     Spacer(Modifier.width(14.dp))
                     Column(Modifier.weight(1f)) {
