@@ -24,21 +24,32 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Set up Gradle 8.7
+      - name: Set up Android SDK and NDK
+        uses: android-actions/setup-android@v3
+      - name: Install Android NDK and CMake
+        run: sdkmanager "ndk;27.0.12077973" "cmake;3.22.1"
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android
+      - name: Install cargo-ndk
+        run: cargo install cargo-ndk --locked
+      - name: Compile Rust core for Android
+        run: cargo ndk --target arm64-v8a --platform 26 --output-dir app/src/main/jniLibs build --release --manifest-path native/rust/Cargo.toml
+      - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
       - name: Compile Android APK
-        run: |
-          if [ "${{ inputs.build_variant }}" = "release" ]; then
-            gradle --no-daemon assembleRelease
-          else
-            gradle --no-daemon assembleDebug
-          fi
+        env:
+          BUILD_VARIANT: ${{ inputs.build_variant || 'debug' }}
+        run: gradle --no-daemon ${BUILD_VARIANT == 'release' && 'assembleRelease' || 'assembleDebug'}
       - name: Prepare named APK
+        env:
+          BUILD_VARIANT: ${{ inputs.build_variant || 'debug' }}
         run: |
           mkdir -p output
-          if [ "${{ inputs.build_variant }}" = "release" ]; then
+          if [ "$BUILD_VARIANT" = "release" ]; then
             cp app/build/outputs/apk/release/app-release-unsigned.apk output/ULTRON-AI-unsigned.apk
           else
             cp app/build/outputs/apk/debug/app-debug.apk output/ULTRON-AI.apk
