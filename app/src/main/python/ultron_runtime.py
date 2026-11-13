@@ -4,10 +4,14 @@ from typing import Any, Dict, List
 
 ALLOWED_TOOLS = {
     "workspace_list", "workspace_read", "workspace_write", "workspace_delete",
-    "ui_read_visible", "ui_tap_text", "ui_global_action", "app_launch",
+    "ui_read_visible", "ui_tap_text", "ui_tap_coordinates", "ui_swipe",
+    "ui_scroll", "ui_type_text", "ui_global_action", "app_launch",
     "apk_build_start", "apk_build_status",
 }
-HIGH_RISK = {"workspace_delete", "ui_tap_text", "ui_global_action", "app_launch", "apk_build_start"}
+HIGH_RISK = {
+    "workspace_delete", "ui_tap_text", "ui_tap_coordinates", "ui_swipe",
+    "ui_scroll", "ui_type_text", "ui_global_action", "app_launch", "apk_build_start",
+}
 
 def validate_plan(raw_json: str) -> str:
     payload: Dict[str, Any] = json.loads(raw_json)
