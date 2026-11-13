@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(ultron_native LANGUAGES CXX)
+add_library(ultron_rust SHARED IMPORTED)
+set_target_properties(ultron_rust PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libultron_rust.so")
+add_library(ultron_jni SHARED ultron_jni.cpp)
+target_compile_features(ultron_jni PRIVATE cxx_std_20)
+target_compile_options(ultron_jni PRIVATE -Wall -Wextra -Werror=return-type -fvisibility=hidden)
+target_link_libraries(ultron_jni PRIVATE ultron_rust log)
