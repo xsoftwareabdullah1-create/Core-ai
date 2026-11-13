@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ULTRON AI</string>
+    <string name="accessibility_description">ULTRON can read visible interface text and perform actions you explicitly approve.</string>
+</resources>
