@@ -1,136 +1,214 @@
 <div align="center">
 
-<img src="logo.svg" width="120" alt="ULTRON AI logo"/>
+<img src="logo.svg" width="132" alt="ULTRON AI logo"/>
 
-# ULTRON AI
-### Your Personal AI Coding & Automation Assistant
+# ⚡ ULTRON AI
 
-**Think. Code. Build. Automate.**
+### **Personal AI Assistant · Android Automation · Coding Workspace**
 
-[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white)](https://developer.android.com/)
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
-[![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)](https://developer.android.com/compose)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Build](https://img.shields.io/badge/Build-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](.github/workflows/build.yml)
+*Designed and engineered by **Ultra Abdullah***
 
-*A mobile-first AI agent project designed to help you create code, manage project files, understand your screen and automate Android tasks—with user approval for sensitive actions.*
+---
+
+[![Android](https://img.shields.io/badge/Android-API%2026%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Compose](https://img.shields.io/badge/Jetpack%20Compose-Native%20UI-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/compose)
+[![Rust](https://img.shields.io/badge/Rust-Native%20Core-DEA584?style=for-the-badge&logo=rust&logoColor=black)](https://www.rust-lang.org)
+[![C++](https://img.shields.io/badge/C%2B%2B-JNI%20Bridge-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org)
+[![Python](https://img.shields.io/badge/Python-Embedded%20Runtime-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-00C853?style=for-the-badge)](LICENSE)
+[![Build](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](.github/workflows/android.yml)
+
+<p><b><i>“Your device. Your commands. Your approval.”</i></b></p>
+
+**A mobile-first AI assistant project that brings conversational AI, permission-based Android actions and a coding workspace together.**
 
 </div>
 
 ---
 
-## ✨ Vision
+## 🌌 System Overview
 
-ULTRON AI aims to bring an AI-powered development workspace to Android. Chat with your AI, describe an app or game, work with project files, inspect your screen and build Android projects through a connected build pipeline.
+**ULTRON AI** is an Android assistant project built around a native Kotlin application and a multi-language runtime. Its goal is to let you talk to an AI agent, work with code and project files, inspect a screen after consent, and request supported Android actions.
 
-The project is under active development. Features marked **Planned** are goals, not claims of completed functionality.
+ULTRON is actively being developed. This repository documents the current foundations and the planned direction; it does not claim that every advanced feature is production-ready.
 
-## 🚀 Project capabilities
+### ✨ Core Direction
 
-| Capability | Status |
+- **AI Conversation:** Connect to an OpenAI-compatible provider through the configured OpenRouter client.
+- **Android UI Automation:** Use Android Accessibility APIs for screen inspection and user-approved interactions.
+- **Voice Input:** Submit spoken prompts through Android speech recognition where supported.
+- **Coding Workspace:** Create and manage files inside the app's private workspace.
+- **Screen Understanding:** Capture screen content only after the Android system's MediaProjection consent flow.
+- **Native Runtime:** Combine Kotlin orchestration with a Rust library and a C++ JNI bridge.
+- **Remote APK Builds:** Compile the Android project on GitHub Actions and download the artifact from a successful run.
+
+---
+
+## 🧠 Runtime Architecture
+
+The app uses separate layers so that Android permissions, AI decisions and native helper code do not become one unrestricted execution surface.
+
+```mermaid
+flowchart TD
+    User["User prompt / voice"] --> UI["ULTRON Android UI"]
+    UI --> Agent["Kotlin Agent Orchestrator"]
+    Agent <--> LLM["OpenRouter-compatible AI"]
+    Agent --> Approval["Action Approval Gate"]
+    Approval --> Tools["Registered Android Tools"]
+    Tools --> Access["Accessibility Service"]
+    Tools --> Workspace["Private Workspace Files"]
+    UI --> Capture["MediaProjection Consent"]
+    Capture --> Vision["Screen/Image Context"]
+    Agent --> Python["Python Plan Validator"]
+    Agent --> JNI["C++ JNI Bridge"]
+    JNI --> Rust["Rust Intent Classifier"]
+    CI["GitHub Actions"] --> APK["APK Artifact"]
+```
+
+### 🧬 Technology Stack
+
+| Layer | Technology | Responsibility |
+|---|---|---|
+| Android application | Kotlin | Lifecycle, permissions and agent orchestration |
+| Interface | Jetpack Compose | Native Android user interface |
+| Native bridge | C++ / JNI | Connect Kotlin to the Rust library |
+| Native helper | Rust | Deterministic intent classification |
+| Embedded runtime | Python 3.11 / Chaquopy | Structured plan validation |
+| AI provider | OpenRouter-compatible API | Model responses and tool-call proposals |
+| Device interaction | Android Accessibility Service | Permission-based UI inspection/actions |
+| Screen capture | Android MediaProjection | User-consented screen capture |
+| Build pipeline | GitHub Actions | Remote APK compilation and artifact upload |
+
+> Rust classification and Python validation are deterministic helper components. They are not separate AI models and do not provide unrestricted shell or device access.
+
+---
+
+## 📱 Feature Status
+
+| Feature | Current status |
 |---|---|
-| OpenRouter chat integration | Foundation |
-| Encrypted API-key preferences | Foundation |
+| Native Android app foundation | Implemented |
+| OpenRouter-compatible chat client | Foundation |
+| Encrypted credential storage | Foundation |
 | Voice input | Foundation |
-| User-approved screen capture and image analysis | Foundation |
-| Private app workspace file operations | Foundation |
-| Android accessibility service integration | Foundation; user approval dialog wired into agent loop |
-| OpenRouter function-calling loop with bounded iterations | Implemented foundation |
-| Per-tool approval dialog before execution | Implemented for registered tools |
-| GitHub Actions APK build pipeline | Configured; CI verification in progress |
-| In-app build dispatch and status polling | Implemented foundation |
-| AI-assisted build-log diagnosis and repair | Planned |
+| Private workspace file tools | Foundation |
+| Accessibility service registration | Integrated; device testing required |
+| Screen capture consent integration | Foundation; device testing required |
+| AI tool-calling and approval flow | Foundation |
+| Rust + JNI + Python helper layers | Added; CI build verification pending |
+| GitHub Actions APK pipeline | Workflow configured; latest run must pass before APK is considered available |
+| Full autonomous multi-step phone operation | In development |
+| Self-repairing code agent | Planned |
 
-**Safety first:** ULTRON must never silently tap, type, install, delete or run potentially destructive actions. Sensitive device actions should be shown to the user with a clear explanation and require explicit approval.
+### 📲 Android Automation
 
-## 🧠 Planned agent workflow
+The intended accessibility toolset includes:
 
-1. Understand the user's request.
-2. Create a structured plan and identify required tools.
-3. Show sensitive Android actions in an approval queue.
-4. Execute only approved actions.
-5. Read results and report what happened.
-6. For supported projects, trigger a remote GitHub Actions build.
-7. Display build status and provide the APK artifact when the workflow succeeds.
+- Read visible UI text and accessible node information.
+- Tap a visible target or a coordinate.
+- Swipe and scroll through an app.
+- Enter text into a focused field.
+- Navigate Back, Home and Recents.
+- Launch an installed application when the required intent is available.
 
-## 🧬 Advanced architecture
+**Important:** Android requires the device owner to enable the Accessibility Service in Settings. Actions should be scoped to the user's request and require confirmation where appropriate. Secure screens, passwords, OTPs and payment confirmations must not be bypassed.
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the runtime boundaries and native build design.
+---
 
-- **Kotlin + Jetpack Compose** — Android lifecycle, UI, permissions, coroutine-based agent orchestration
-- **C++ / JNI** — narrow native interface compiled with CMake
-- **Rust** — Android arm64 native shared library, linked into the JNI bridge
-- **Python 3.11 / Chaquopy** — embedded deterministic plan validation; not an unrestricted shell
-- **Kotlin** — Android application logic
-- **Jetpack Compose** — modern native UI
-- **OpenRouter API** — model access (model availability depends on provider)
-- **Android Accessibility Service** — permission-based UI interaction
-- **MediaProjection** — user-consented screen capture
-- **GitHub Actions** — remote Android build automation
-- **AndroidX Security Crypto** — encrypted preference storage
+## 🎛️ Interaction Flow
 
-The Rust classifier and Python validator are deterministic helper layers. They are not independent AI models and do not grant unrestricted device access.
+1. Give ULTRON a text or voice instruction.
+2. The AI proposes a structured response or registered tool call.
+3. ULTRON validates the request and checks whether approval is required.
+4. The user reviews and approves a sensitive action.
+5. The app executes the supported operation and reports its result.
 
-## 📱 Requirements
+No hidden screen recording or silent permission activation is intended.
 
-- Android 8.0 (API 26) or newer
-- Internet connection for remote AI features
-- An OpenRouter API key and a supported model
-- Explicit Android permissions for screen capture and accessibility features
-- A GitHub repository with Actions enabled for remote APK builds
+---
 
 ## ⚙️ Setup
 
-1. Fork or clone this repository.
-2. Open the project in Android Studio or another compatible Android Gradle environment.
-3. Sync the Gradle project.
-4. Run the app on an Android device.
-5. Add your OpenRouter API key inside the app's settings.
-6. Choose a model that supports the features you intend to use.
+### Requirements
 
-Never commit API keys, access tokens, passwords or other secrets to the repository. Use encrypted local storage for personal API credentials and GitHub Actions Secrets for CI credentials.
+- Android 8.0 (API 26) or newer.
+- Internet connection for remote AI features.
+- An OpenRouter API key and a model supported by the provider.
+- Accessibility permission only if you want Android UI automation.
+- Screen-capture consent each time the Android system requires it.
+
+### Run the Android project
+
+1. Clone or fork this repository.
+2. Open the project in Android Studio or a compatible Android Gradle environment.
+3. Allow Gradle to sync and download dependencies.
+4. Run the `app` configuration on an Android device.
+5. Add your provider API key inside the app's settings.
+6. Enable Accessibility manually in Android Settings only if you want to test UI automation.
+
+Never commit API keys, passwords or access tokens. Keep personal credentials in the app's encrypted storage and use GitHub Actions Secrets for CI credentials.
+
+---
 
 ## 🏗️ Build APK with GitHub Actions
 
-The repository is intended to build the Android app remotely using GitHub Actions, so a local Android Studio installation is not required on the phone.
+This repository includes a remote Android build workflow, so you can start a build from GitHub without installing Android Studio on your phone.
 
-1. Open the **Actions** tab in this repository.
-2. Select the Android build workflow.
-3. Run the workflow if manual dispatch is enabled, or push a commit to a configured trigger branch.
-4. Wait for the workflow to finish.
-5. Open the successful run and download its APK artifact.
+1. Open the repository's **Actions** tab.
+2. Select **ULTRON Android APK**.
+3. Choose **Run workflow**.
+4. Select `debug` for a test APK or `release` for an unsigned release APK.
+5. Wait for every build step to complete successfully.
+6. Open the completed run and download the **ULTRON-AI-*-APK** artifact.
 
-A downloadable APK is available only after a successful workflow run. Build status and artifact availability are not guaranteed until CI has been tested.
+The workflow compiles the Rust arm64 library first, then builds the Android APK and uploads it as an artifact. A failed workflow does not produce an installable APK. Release output is unsigned unless a signing configuration is added.
 
-## 🔐 Permissions & privacy
+[**Open Android Build Workflow →**](.github/workflows/android.yml)
 
-- API credentials should remain on-device in encrypted storage.
-- Screen capture requires Android's system consent prompt.
-- Accessibility access is optional and must be enabled by the device owner in Android Settings.
-- Tool execution should be limited to the user's request and approved actions.
-- Avoid sending private screen content or project files to an AI provider unless the user chooses to do so.
-- Never store secrets in source code, logs or screenshots.
+---
+
+## 🔐 Privacy & Safety
+
+- API keys should remain in encrypted local storage and must never be committed.
+- Accessibility is optional and enabled manually by the device owner.
+- Screen capture follows Android's system consent prompt.
+- Sensitive actions should be reviewed before execution.
+- Private screen contents and project files should only be sent to an AI provider when the user chooses to do so.
+- The agent must not bypass secure fields, OTP checks or payment confirmations.
+
+---
 
 ## 🗺️ Roadmap
 
-- [ ] Complete autonomous tool-calling loop with bounded execution
-- [ ] Add human-readable action approval cards
-- [ ] Add approved tap, swipe, type and app-launch actions
-- [ ] Add GitHub Actions build dispatch
-- [ ] Add in-app build progress, logs and artifact download
-- [ ] Add build error analysis and suggested fixes
-- [ ] Improve project generation for Android apps and games
-- [ ] Add tests, accessibility checks and security review
+- [x] Kotlin Android application foundation
+- [x] Rust native helper and C++ JNI bridge
+- [x] Python plan-validation layer
+- [x] Initial accessibility-service integration
+- [ ] Verify end-to-end build on GitHub Actions
+- [ ] Device-test accessibility actions on supported Android versions
+- [ ] Improve the JARVIS-inspired holographic HUD and responsive chat interface
+- [ ] Complete approval cards and action-result history
+- [ ] Add robust project generation and APK build monitoring
+- [ ] Add automated tests and security review
+
+---
+
+## 📚 Credits & Third-Party Notices
+
+The accessibility automation work references and adapts concepts/code from **[JARVIS / PrivateAgent by AbuZar-Ansarii](https://github.com/AbuZar-Ansarii/Jarvis)**.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution and license details. The original project's name, branding and identity remain with its respective author.
+
+---
 
 ## 🤝 Contributing
 
-Bug reports, ideas and pull requests are welcome. Please describe the problem, expected behavior and steps to reproduce it. Do not include private API keys, personal data or confidential project files in issues.
+Suggestions, bug reports and pull requests are welcome. Include reproducible steps, expected behavior and relevant logs. Remove API keys, personal data and other secrets before sharing diagnostics.
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for the complete terms.
-
-The MIT License permits reuse, modification and redistribution, including commercial use, provided the required copyright and license notices are retained. It does not prevent others from copying the code.
+ULTRON AI is distributed under the [MIT License](LICENSE), subject to the third-party notices included in this repository.
 
 ---
 
@@ -138,6 +216,6 @@ The MIT License permits reuse, modification and redistribution, including commer
 
 **Built with curiosity by Ultra Abdullah**
 
-*ULTRON AI — Build beyond limits.*
+*ULTRON AI — Think. Create. Automate.*
 
 </div>
